@@ -7,39 +7,32 @@ using System.Threading.Tasks;
 
 namespace LPI_2DTextMap
 {
-    /*Project - C#: 2D Text-Based RPG Map (Multi-Dimensional Arrays):
-     * Code a C# program that displays a 2D text-based RPG map.
-     * 
-     * Functional Specifications:
-        displays 2D text-based RPG map
-        scales
-        has a border (border does not scale)
+    /* Project - C#: 2D Text-Based RPG Map (Multi-Dimensional Arrays):
+  
+      * Code a C# program that displays a 2D text-based RPG map. *
+     
+        + Functional Specifications:
+            - displays 2D text-based RPG map
+            - scales
+            - has a border (border does not scale)
 
 
-    Technical Specifications:
+        + Technical Specifications:
+            - DisplayMap() displays an RPG map by displaying each tile as a single character.
+            - Draw each map tile using a single character
+            - DisplayMap(int scale) = same; but display each tile scaled, as a grid of characters.
+            - If scale = 3, then draw each map tile using 3x3 characters
+            - all DisplayMap() methods should display a map border using extended ASCII characters.
 
-implement the following methods:
-DisplayMap() = displays an RPG map by displaying each tile as a single character.
-Use map code provided below.
-Draw each map tile using a single character
-See output for example
-DisplayMap(int scale) = same; but display each tile scaled, as a grid of characters.
-Use map code provided below.
-If scale = 3, then draw each map tile using 3x3 characters
-See output for example
-all DisplayMap() methods should display a map border using extended ASCII characters.
-use a multidimensional array (2D array) to represent the 2D text-based RPG map.
-
-        Extra Mile Suggestions:
-
-    make a better map
-    implement methods to show a map legend
-    implement color
-    different color for every tile
-    different color for same tiles (white and grey for mountains perhaps)
-    put a player on the map
-    make the player move
-    etc.
+        + Extra Mile Suggestions:
+            - make a better map
+            - implement methods to show a map legend
+            - implement color
+            - different color for every tile
+            - different color for same tiles (white and grey for mountains perhaps)
+            - put a player on the map
+            - make the player move
+            - etc.
      */
 
     class Program
@@ -71,24 +64,24 @@ use a multidimensional array (2D array) to represent the 2D text-based RPG map.
 
         static void DrawMap(int scale)
         {
-            int z;
+            int border;
             int x;
             int y;
 
             Console.Write("╔");
 
-            for (z = 0; z < 30; z++)
+            for (border = 0; border < map.GetLength(1); border++)
             {
                 Console.Write("═");
             }
 
             Console.WriteLine("╗");
 
-            for (y = 0; y < 12; y++)
+            for (y = 0; y < map.GetLength(1); y++)
             {
                 Console.Write("║");
 
-                for (x = 0; x < 30; x++)
+                for (x = 0; x < map.GetLength(1); x++)
                 {
                     Console.Write(map[y, x]);
                 }
@@ -98,7 +91,7 @@ use a multidimensional array (2D array) to represent the 2D text-based RPG map.
 
             Console.Write("╚");
 
-            for (z = 0; z < 30; z++)
+            for (border = 0; border < map.GetLength(1); border++)
             {
                 Console.Write("═");
             }
