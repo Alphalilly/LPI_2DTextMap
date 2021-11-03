@@ -57,50 +57,61 @@ namespace LPI_2DTextMap
         static void Main()
         {
 
-            DrawMap(0);
+            DrawMap(2);
+
+          
+
 
             Console.ReadKey(true);
         }
 
         static void DrawMap(int scale)
+            // to scale, is to repeat the same charcater an x amount of times based on the value of scale
+                // so scale the range that the map is going to be printed
+                // and "scale map"
         {
-            int border;
-            int x;
-            int y;
+            int Y = map.GetLength(0); // gets the length of the 0th dimention in map[]
+            int X = map.GetLength(1); // gets the length of the 1st dimention in map[]
 
-            Console.Write("╔");
+            Console.WriteLine(Y);
+            Console.WriteLine(Y * scale);
 
-            for (border = 0; border < map.GetLength(1); border++)
-            {
-                Console.Write("═");
-            }
+            Console.WriteLine(X);
+            Console.WriteLine(X * scale);
 
-            Console.WriteLine("╗");
+            Console.ReadKey(true);
 
-            for (y = 0; y < map.GetLength(1); y++)
+
+            //Console.Write("╔");
+
+            //for (int xBorder = 0; xBorder < X ; xBorder++)
+            //{
+            //    Console.Write("═");
+            //}
+
+            //Console.WriteLine("╗");
+
+            for (int y = 0; y < Y; y++)
             {
                 Console.Write("║");
-
-                for (x = 0; x < map.GetLength(1); x++)
+                for (int x = 0; x < X; x++)
                 {
-                    Console.Write(map[y, x]);
+                    Console.Write(map[y , x]);
                 }
-
                 Console.WriteLine("║");
             }
 
-            Console.Write("╚");
+            //Console.Write("╚");
 
-            for (border = 0; border < map.GetLength(1); border++)
-            {
-                Console.Write("═");
-            }
+            //for (int xBorder = 0; xBorder < X; xBorder++)
+            //{
+            //    Console.Write("═");
+            //}
 
-            Console.WriteLine("╝");
+            //Console.WriteLine("╝");
         }
     }
 }
-
 
 /* old
 //private const char V = 'g'; what?
@@ -134,3 +145,13 @@ namespace LPI_2DTextMap
 //╔═╗
 //║ ║
 //╚═╝
+
+/*
+            char a = 'h';
+            void OWO(int d)
+            {
+                Console.WriteLine(a * d);
+            }
+
+            OWO(0);
+            */
