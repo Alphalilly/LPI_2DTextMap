@@ -16,7 +16,6 @@ namespace LPI_2DTextMap
             - scales
             - has a border (border does not scale)
 
-
         + Technical Specifications:
             - DisplayMap() displays an RPG map by displaying each tile as a single character.
             - Draw each map tile using a single character
@@ -56,59 +55,57 @@ namespace LPI_2DTextMap
 
         static void Main()
         {
+            DrawMap(1);
 
             DrawMap(2);
-
-          
 
 
             Console.ReadKey(true);
         }
 
         static void DrawMap(int scale)
-            // to scale, is to repeat the same charcater an x amount of times based on the value of scale
-                // so scale the range that the map is going to be printed
-                // and "scale map"
         {
-            int Y = map.GetLength(0); // gets the length of the 0th dimention in map[]
-            int X = map.GetLength(1); // gets the length of the 1st dimention in map[]
+            // to scale, is to repeat the same charcater an x amount of times based on the value of scale
+            // so scale the range that the map is going to be printed
+            // and "scale map"
 
-            Console.WriteLine(Y);
-            Console.WriteLine(Y * scale);
+            int Y = map.GetLength(0); // gets the length of the 0th dimention in map[,]
+            int X = map.GetLength(1); // gets the length of the 1st dimention in map[,]
+            char xLine = '═';
+            char yLine = '║';
 
-            Console.WriteLine(X);
-            Console.WriteLine(X * scale);
+            void Boarder(char edgeA, char edgeB)
+            {
+                Console.Write(edgeA);
 
-            Console.ReadKey(true);
+                for (int xBorder = 0; xBorder < X * scale; xBorder++)
+                {
+                    Console.Write(xLine);
+                }
 
+                Console.WriteLine(edgeB);
+            }
 
-            //Console.Write("╔");
+            // oh shit. so the .Length and Scale should be handled in 2 seporate loops. (well 4 in total for each axis)
+            // one that increases the capacity of array, and the other that increases the ammount of characters.
 
-            //for (int xBorder = 0; xBorder < X ; xBorder++)
-            //{
-            //    Console.Write("═");
-            //}
-
-            //Console.WriteLine("╗");
+            Boarder('╔', '╗');
 
             for (int y = 0; y < Y; y++)
             {
-                Console.Write("║");
-                for (int x = 0; x < X; x++)
+                for (int i = 0; i < scale; i++)
                 {
-                    Console.Write(map[y , x]);
+                    Console.Write(yLine);
+
+                    for (int x = 0; x < X; x++)
+                        for (int j = 0; j < scale; j++)
+                            Console.Write(map[y, x]);
+            
+                    Console.WriteLine(yLine);
                 }
-                Console.WriteLine("║");
             }
 
-            //Console.Write("╚");
-
-            //for (int xBorder = 0; xBorder < X; xBorder++)
-            //{
-            //    Console.Write("═");
-            //}
-
-            //Console.WriteLine("╝");
+            Boarder('╚', '╝');
         }
     }
 }
