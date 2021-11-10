@@ -34,6 +34,7 @@ namespace LPI_2DTextMap
             - etc.
      */
 
+    //https://blob.jacobsdata.com/software-alchemy/entry2/visual-studio-2019-hotkey-snippet-cheat-sheet.pdf#:~:text=Visual%20Studio%202019%20Hotkey%20and%20Code%20Snippet%20Cheat,F10%20F11%20Step%20into%20Ctrl%2BF10%20Run%20to%20cursor
     class Program
     {
         static void Main()
@@ -85,22 +86,52 @@ namespace LPI_2DTextMap
 
             //}
 
-            if (map[y, x] == '^')
+
+            switch(map[y, x])
             {
-                Console.ForegroundColor = ConsoleColor.Cyan;
+                case '^':
+                {
+                    Console.ForegroundColor = ConsoleColor.Cyan;
+                    break;
+                }
+                case '*':
+                {
+                    Console.ForegroundColor = ConsoleColor.Green;
+                    break;
+                }
+                case '~':
+                {
+                    Console.ForegroundColor = ConsoleColor.Blue;
+                    break;
+                }
+                case '"':
+                {
+                    Console.ForegroundColor = ConsoleColor.Red;
+                    break;
+                }
+                default:
+                {
+                    Console.ForegroundColor = ConsoleColor.Gray;
+                    break;
+                }
             }
-            else if (map[y, x] == '*')
-            {
-                Console.ForegroundColor = ConsoleColor.Green;
-            }
-            else if (map[y, x] == '~')
-            {
-                Console.ForegroundColor = ConsoleColor.Blue;
-            }
-            else if (map[y, x] == '\'')
-            {
-                Console.ForegroundColor = ConsoleColor.Gray;
-            }
+
+            //if (map[y, x] == '^')
+            //{
+            //    Console.ForegroundColor = ConsoleColor.Cyan;
+            //}
+            //else if (map[y, x] == '*')
+            //{
+            //    Console.ForegroundColor = ConsoleColor.Green;
+            //}
+            //else if (map[y, x] == '~')
+            //{
+            //    Console.ForegroundColor = ConsoleColor.Blue;
+            //}
+            //else if (map[y, x] == '\'')
+            //{
+            //    Console.ForegroundColor = ConsoleColor.Gray;
+            //}
         }
 
         public static void DrawMap()
