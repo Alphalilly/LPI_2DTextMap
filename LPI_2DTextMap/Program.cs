@@ -43,7 +43,6 @@ namespace LPI_2DTextMap
 
             Map.DrawMap(2);
 
-
             Console.ReadKey(true);
         }
 
@@ -71,20 +70,10 @@ namespace LPI_2DTextMap
         static int Xlength = map.GetLength(1); // gets the length of the 1st dimention in map[,]
         static char xLine = '═';
         static char yLine = '║';
+        static int y;
+        static int x;
 
-        static void Boarder(char edgeA, char edgeB, int scale) // dont name it scale (or just make 2 of them lol)
-        {
-            Console.Write(edgeA);
-
-            for (int xBorder = 0; xBorder < Xlength * scale; xBorder++)
-            {
-                Console.Write(xLine);
-            }
-
-            Console.WriteLine(edgeB);
-        }
-
-        static void Colour(char hue)
+        static void Colour()
         {
 
             //try to make it a switch statement 
@@ -95,23 +84,55 @@ namespace LPI_2DTextMap
             //        break;
 
             //}
+
+            if (map[y, x] == '^')
+            {
+                Console.ForegroundColor = ConsoleColor.Cyan;
+            }
+            else if (map[y, x] == '*')
+            {
+                Console.ForegroundColor = ConsoleColor.Green;
+            }
+            else if (map[y, x] == '~')
+            {
+                Console.ForegroundColor = ConsoleColor.Blue;
+            }
+            else if (map[y, x] == '\'')
+            {
+                Console.ForegroundColor = ConsoleColor.Gray;
+            }
         }
 
         public static void DrawMap()
         {
-            Boarder('╔', '╗', 1);
+            void Boarder(char edgeA, char edgeB)
+            {
+                Console.Write(edgeA);
 
-            for (int y = 0; y < Ylength; y++)
+                for (int xBorder = 0; xBorder < Xlength; xBorder++)
+                {
+                    Console.Write(xLine);
+                }
+
+                Console.WriteLine(edgeB);
+            }
+
+            Boarder('╔', '╗');
+
+            for (y = 0; y < Ylength; y++)
             {
                 Console.Write(yLine);
 
-                    for (int x = 0; x < Xlength; x++)
-                        Console.Write(map[y, x]);
+                for (x = 0; x < Xlength; x++)
+                {
+                    Colour();
+                    Console.Write(map[y, x]);
+                }      
 
                 Console.WriteLine(yLine);
             }
 
-            Boarder('╚', '╝', 1);
+            Boarder('╚', '╝');
         }
         public static void DrawMap(int scale)
         {
@@ -122,7 +143,19 @@ namespace LPI_2DTextMap
             // oh shit. so the .Length and Scale should be handled in 2 seporate loops. (well 4 in total for each axis)
             // one that increases the capacity of array, and the other that increases the ammount of characters.
 
-            Boarder('╔', '╗', scale);
+            void Boarder(char edgeA, char edgeB)
+            {
+                Console.Write(edgeA);
+
+                for (int xBorder = 0; xBorder < Xlength * scale; xBorder++)
+                {
+                    Console.Write(xLine);
+                }
+
+                Console.WriteLine(edgeB);
+            }
+
+            Boarder('╔', '╗');
 
             for (int y = 0; y < Ylength; y++)
             {
@@ -131,14 +164,18 @@ namespace LPI_2DTextMap
                     Console.Write(yLine);
 
                     for (int x = 0; x < Xlength; x++)
+                    {
                         for (int j = 0; j < scale; j++)
+                        {
                             Console.Write(map[y, x]);
+                        }
+                    }
 
                     Console.WriteLine(yLine);
                 }
             }
 
-            Boarder('╚', '╝', scale);
+            Boarder('╚', '╝');
         }
     }
 }
