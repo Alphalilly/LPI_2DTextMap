@@ -34,7 +34,6 @@ namespace LPI_2DTextMap
             - etc.
      */
 
-    //https://blob.jacobsdata.com/software-alchemy/entry2/visual-studio-2019-hotkey-snippet-cheat-sheet.pdf#:~:text=Visual%20Studio%202019%20Hotkey%20and%20Code%20Snippet%20Cheat,F10%20F11%20Step%20into%20Ctrl%2BF10%20Run%20to%20cursor
     class Program
     {
         static void Main()
@@ -43,6 +42,12 @@ namespace LPI_2DTextMap
             Map.DrawMap();
 
             Map.DrawMap(2);
+
+            Map.DrawMap(3);
+
+            Map.DrawMap(4);
+
+            Map.DrawMap(5);
 
             Console.ReadKey(true);
         }
@@ -74,182 +79,107 @@ namespace LPI_2DTextMap
         static int y;
         static int x;
 
-        static void Colour()
+        static void SetColour(char c)
         {
-
-            //try to make it a switch statement 
-            //switch(hue)
-            //{
-            //    case == '*':
-            //            Console.WriteLine("dafdaf");
-            //        break;
-
-            //}
-
-
-            switch(map[y, x])
+            switch (c)
             {
                 case '^':
-                {
                     Console.ForegroundColor = ConsoleColor.Cyan;
                     break;
-                }
                 case '*':
-                {
                     Console.ForegroundColor = ConsoleColor.Green;
                     break;
-                }
                 case '~':
-                {
                     Console.ForegroundColor = ConsoleColor.Blue;
                     break;
-                }
-                case '"':
-                {
+                case '\'':
+                    Console.ForegroundColor = ConsoleColor.DarkGreen;
+                    break;
+                default:
                     Console.ForegroundColor = ConsoleColor.Red;
                     break;
-                }
-                default:
-                {
-                    Console.ForegroundColor = ConsoleColor.Gray;
-                    break;
-                }
             }
+        }
 
-            //if (map[y, x] == '^')
-            //{
-            //    Console.ForegroundColor = ConsoleColor.Cyan;
-            //}
-            //else if (map[y, x] == '*')
-            //{
-            //    Console.ForegroundColor = ConsoleColor.Green;
-            //}
-            //else if (map[y, x] == '~')
-            //{
-            //    Console.ForegroundColor = ConsoleColor.Blue;
-            //}
-            //else if (map[y, x] == '\'')
-            //{
-            //    Console.ForegroundColor = ConsoleColor.Gray;
-            //}
+        static void DrawChar(char c)
+        {
+            SetColour(c);
+            Console.Write(c);
         }
 
         public static void DrawMap()
         {
-            void Boarder(char edgeA, char edgeB)
+            void Border(char edgeA, char edgeB)
             {
-                Console.Write(edgeA);
+                DrawChar(edgeA);
 
                 for (int xBorder = 0; xBorder < Xlength; xBorder++)
                 {
-                    Console.Write(xLine);
+                    DrawChar(xLine);
                 }
 
-                Console.WriteLine(edgeB);
+                DrawChar(edgeB);
             }
 
-            Boarder('╔', '╗');
+            Border('╔', '╗');
+            DrawChar('\n');
 
             for (y = 0; y < Ylength; y++)
             {
-                Console.Write(yLine);
+                DrawChar(yLine);
 
                 for (x = 0; x < Xlength; x++)
-                {
-                    Colour();
-                    Console.Write(map[y, x]);
-                }      
+                    DrawChar(map[y, x]);
 
-                Console.WriteLine(yLine);
+                DrawChar(yLine);
+                DrawChar('\n');
             }
 
-            Boarder('╚', '╝');
+            Border('╚', '╝');
+            DrawChar('\n');
         }
-        public static void DrawMap(int scale)
+
+        public static void DrawMap(int scale)  // (int scale = 1)
         {
             // to scale, is to repeat the same charcater an x amount of times based on the value of scale
             // so scale the range that the map is going to be printed
             // and "scale map"
 
-            // oh shit. so the .Length and Scale should be handled in 2 seporate loops. (well 4 in total for each axis)
+            // .Length and Scale should be handled in 2 seporate loops. (well 4 in total for each axis)
             // one that increases the capacity of array, and the other that increases the ammount of characters.
 
-            void Boarder(char edgeA, char edgeB)
+            Console.WriteLine("Map Scale x" + scale);
+
+            void Border(char edgeA, char edgeB)
             {
-                Console.Write(edgeA);
+                DrawChar(edgeA);
 
                 for (int xBorder = 0; xBorder < Xlength * scale; xBorder++)
                 {
-                    Console.Write(xLine);
+                    DrawChar(xLine);
                 }
 
-                Console.WriteLine(edgeB);
+                DrawChar(edgeB);
             }
 
-            Boarder('╔', '╗');
+            Border('╔', '╗');
+            DrawChar('\n');
 
             for (int y = 0; y < Ylength; y++)
-            {
                 for (int i = 0; i < scale; i++)
                 {
-                    Console.Write(yLine);
+                    DrawChar(yLine);
 
                     for (int x = 0; x < Xlength; x++)
-                    {
                         for (int j = 0; j < scale; j++)
-                        {
-                            Console.Write(map[y, x]);
-                        }
-                    }
+                            DrawChar(map[y, x]);
 
-                    Console.WriteLine(yLine);
+                    DrawChar(yLine);
+                    DrawChar('\n');
                 }
-            }
 
-            Boarder('╚', '╝');
+            Border('╚', '╝');
+            DrawChar('\n');
         }
     }
 }
-
-/* old
-//private const char V = 'g'; what?
-
-//char w = '~';
-    //char g = ':';
-    //char t = '*';
-    //char m = '^';
-
-    //{'m','m','m','g','g','g','g','g','g','g','g','g','g','g'},
-    //{'m','m','g','g','g','g','t','t','t','g','g','g','g','g'},
-    //{'m','g','g','g','t','t','t','t','t','t','g','g','g','g'},
-    //{'g','g','g','g','g','g','g','g','g','g','g','g','g','g'},
-    //{'g','g','g','g','w','w','w','g','g','g','g','g','g','g'},
-    //{'g','g','g','w','w','w','w','w','g','g','g','g','g','g'},
-    //{'g','t','t','g','w','w','w','w','w','g','g','g','g','g'},
-    //{'t','t','t','g','g','g','w','w','w','g','g','g','g','g'},
-    //{'g','g','g','g','g','g','g','w','g','g','g','g','g','g'},
-    //{'g','g','g','g','g','g','g','t','t','t','t','g','g','g'},
-    //{'g','g','g','g','g','m','m','m','g','g','g','g','g','g'},
-    //{'g','g','g','m','m','m','m','m','m','m','m','m','m','g'},
-
-
-    // 1 pixel = 1 char
-    // max 1000 x 1000 pixels
-    // min 100 x 100
-    // use an image map to decide what goes where?
-    // this might be too advanced
-*/
-
-//╔═╗
-//║ ║
-//╚═╝
-
-/*
-            char a = 'h';
-            void OWO(int d)
-            {
-                Console.WriteLine(a * d);
-            }
-
-            OWO(0);
-            */
